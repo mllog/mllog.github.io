@@ -14,7 +14,7 @@ baseurl: ""
 # Of course don't forget to change the username and projectname to YOUR username and project
 
 # Name of website
-title: Machine Learning Blog
+title: MLLOG
 
 # Short description of your site
 description: Enriching and sharing knowledge are awesome!
@@ -24,7 +24,7 @@ description: Enriching and sharing knowledge are awesome!
 # List of links in the navigation bar
 navbar-links:
   Blog: ""
-  About Us: "aboutme"
+  About Us: "aboutus"
   Resources:
     - Learn markdown: "http://www.markdowntutorial.com/"
     - GitHub Pages: "https://pages.github.com/"
@@ -38,7 +38,7 @@ avatar: "/img/avatar-icon.png"
 # Change all these values or delete the ones you don't want.
 # Important: you must keep the "name" parameter, everything else you can remove
 author:
-  name: ML Log
+  name: MLLog
   email: "trangmx@ai.soc.i.kyoto-u.ac.jp"
   facebook: mllog  # eg. daattali
   github: mllog    # eg. daattali
