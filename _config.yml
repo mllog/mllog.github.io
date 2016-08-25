@@ -38,7 +38,7 @@ avatar: "/img/mllogavatar.png"
 # Change all these values or delete the ones you don't want.
 # Important: you must keep the "name" parameter, everything else you can remove
 author:
-  name: MLLog
+  name: © MLLog
   email: "trangmx@ai.soc.i.kyoto-u.ac.jp"
   facebook: mllog  # eg. daattali
   github: mllog    # eg. daattali
