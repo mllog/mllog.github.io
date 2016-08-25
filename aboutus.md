@@ -4,7 +4,7 @@ title: About us
 subtitle: Keep Calm and Carry on Studying
 ---
 
-Chúng tôi là những người yêu thích "Học máy (Machine Learning)" và "Khoa học dữ liệu (Data Science)". Chúng tôi mong muốn được chia sẻ và kết nối công đồng những người đang nghiên cứu và làm việc trong lĩnh vực này.
+Chúng tôi là những người yêu thích "Machine Learning" (Từ này không biết dịch sang tiếng Việt như thế nào cho chính xác vì vậy chúng tôi để nguyên tiếng Anh) và "Khoa học dữ liệu (Data Science)". Chúng tôi mong muốn được chia sẻ và kết nối công đồng những người đang nghiên cứu và làm việc trong lĩnh vực này.
 
 
 ### Thành viên:
