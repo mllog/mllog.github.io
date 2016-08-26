@@ -53,4 +53,4 @@ foo(3)
 
 Here are some examples of math equations:
 
-\(\frac{\delta E_{x}}{\delta t} = \frac{\delta f(z-ct)}{\delta t}\)
+$$\frac{\delta E_{x}}{\delta t} = \frac{\delta f(z-ct)}{\delta t} = f^{\prime}(z - ct)\Big(\frac{\delta(z-ct)}{\delta t}\Big) = -c*f^{\prime}(z - ct)$$
