@@ -52,7 +52,7 @@ Trong cuốn [Machine Learning: An Algorithmic Perspective](http://www.amazon.co
 
 Chúng ta có thể thấy rõ hơn các lĩnh vực và kỷ năng cần thiết trong Machine Learning trong [biểu đồ Venn](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram) tạo bởi Drew Coway dưới đây:
 
-[Data science Venn diagram by Drew Coway](https://mllog.github.io/img/Data_Science_VD.png)
+![Data science Venn diagram by Drew Coway](https://mllog.github.io/img/Data_Science_VD.png){: .center-image }
 
 ## Định nghĩa từ góc nhìn của trình viên
 
