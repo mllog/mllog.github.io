@@ -626,3 +626,9 @@ td.gutter {
 #social-share-section {
   margin-bottom: 30px;
 }
+
+.center-image
+{
+    margin: 0 auto;
+    display: block;
+}
