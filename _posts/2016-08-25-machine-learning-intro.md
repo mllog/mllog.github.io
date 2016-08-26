@@ -50,9 +50,17 @@ Trong cuốn [Machine Learning: An Algorithmic Perspective](http://www.amazon.co
 
 ### Biển đồ Venn
 
-Chúng ta có thể thấy rõ hơn các lĩnh vực và kỷ năng cần thiết trong Machine Learning trong [biểu đồ Venn](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram) tạo bởi Drew Coway dưới đây:
+Chúng ta có thể thấy rõ hơn các lĩnh vực và kỷ năng cần thiết cho Machine Learning trong [biểu đồ Venn](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram) tạo bởi Drew Coway dưới đây:
 
 ![Data science Venn diagram by Drew Coway](https://mllog.github.io/img/Data_Science_VD.png){: .center-image }
+
+{% include image.html
+            img="img/Data_Science_VD.png"
+            title="Data science diagram"
+            caption="Data science Venn diagram by Drew Coway"
+            url="http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram"%}
+
+*Data science Venn diagram by Drew Coway*
 
 ## Định nghĩa từ góc nhìn của trình viên
 
