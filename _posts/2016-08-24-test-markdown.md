@@ -53,10 +53,4 @@ foo(3)
 
 Here are some examples of math equations:
 
-$$a^2 + b^2 = c^2$$
-
-$$\mathbf{X} = \mathbf{Z} \mathbf{P^\mathsf{T}}$$
-
-{% raw %}
-$$ \mathbf{X}_{n,p} = \mathbf{A}_{n,k} \mathbf{B}_{k,p} $$
-{% endraw %}
+$$\frac{\delta E_{x}}{\delta t} = \frac{\delta f(z-ct)}{\delta t} = f^{\prime}(z - ct)\Big(\frac{\delta(z-ct)}{\delta t}\Big) = -c*f^{\prime}(z - ct)$$
