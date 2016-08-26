@@ -39,15 +39,23 @@ Trong quyển [Pattern Recognition and Machine Learning!](http://www.amazon.com/
 
 >*Pattern recognition has its origins in engineering, whereas machine learning grew out of computer science. However, these activities can be viewed as two facets of the same field…*
 
-Định nghĩa này là từ góc nhìn engineering (engineering perspective). 
+Định nghĩa này là từ góc nhìn engineering (engineering perspective). Đây là một phương pháp tiếp cận đã được dùng trong thời gian dài, đáng để chung ta học theo. Theo một nghĩa rộng hơn, bât kể một phương pháp trong một lĩnh vực nào đó, nếu phương pháp đó phù hợp với điều chúng ta cần là giúp chúng ta có được kết quả từ việc học từ dữ liệu, thì chúng ta có thể gọi phương pháp đó là Machine Learning.
 
 ### An Algorithmic Perspective
+Trong cuốn [Machine Learning: An Algorithmic Perspective!](http://www.amazon.com/dp/B005H6YE18?tag=inspiredalgor-20), Marsland đưa ra định nghĩa dựa trên định nghĩa của Mitchel:
 
+>*One of the most interesting features of machine learning is that it lies on the boundary of several different academic disciplines, principally computer science, statistics, mathematics, and engineering. …machine learning is usually studied as part of artificial intelligence, which puts it firmly into computer science …understanding why these algorithms work requires a certain amount of statistical and mathematical sophistication that is often missing from computer science undergraduates.*
+
+Định nghĩa này rất sau sắc và mang nhiều thông tin. Điều đầu tiên Marsland nhấn mạnh tính chất đa lĩnh vực của Machine Learning từ khoa học máy tính, xác suất thông kê, toán và kỷ thuật. Tác giả cũng nhấn mạnh rằng để hiểu được các thuật toán trong Machine Learning chúng ta cần có lượng kiến thúc nhất định về thông kê và toán học, các kiến thức này thì các sinh viên đại học hiện còn rất hạn chế. Vậy bạn muốn bước chân vào Machine Learning, hãy bắt đầu chuẩn bị cho mình những kiến thức nền tảng về toán và xác suất thông kê.
 
 ### Biển đồ Venn
 
+Chúng ta có thể thấy rõ hơn các lĩnh vực và kỷ năng cần thiết trong Machine Learning trong [biểu đồ Venn!](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram) tạo bởi Drew Coway dưới đây:
 
-## Định nghĩa từ lập trình viên
+![Data science Venn diagram by Drew Coway]
+(https://mllog.github.io/img/Data_Science_VD.png)
+
+## Định nghĩa từ góc nhìn của trình viên
 
 
 ### Vấn đề phức tạp (Complex Problems)
