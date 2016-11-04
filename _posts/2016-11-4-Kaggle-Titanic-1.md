@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Kaggle Titanic 1
-subtitle: Notebook 1 for Kaggle Titanic Competition
-tags: [machine learning, Hand-on]
+title: Start ML Journey with Titanic
+subtitle: A Notebook for Kaggle Titanic Competition
+tags: [machine learning, kaggle]
 ---
 
 
