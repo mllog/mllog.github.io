@@ -6,6 +6,7 @@ tags: [machine learning, kaggle]
 ---
 
 # Topics
+
 ## - Removing and imputing missing values from the dataset
 ## - Getting categorical data into shape for machine learning algorithms
 ## - Selecting relevant features for the model construction
