@@ -48,7 +48,7 @@ $$
 #### $$w_j := w_j + \Delta w_j\\ \text{Where: } \Delta w_j := \eta (y^{(i)} - \hat{y_{(i)}})x_j^{(i)}$$
 #### $\eta$ is the learning rate (a constant between 0.0 and 1.0), $y^{(i)}$ is the true class lable of the $i_{th}$ training sample, and $\hat{y_{(i)}}$ is the predicted class label.
 
-![Perceptron](img/perceptron.png)
+![Perceptron](https://mllog.github.io/img/pythonmlch2/perceptron.png)
 
 ## Bellow is implemetation of the perceptron learning algorithm in Python
 
@@ -225,7 +225,7 @@ plt.show()
 ```
 
 
-![png](output_12_0.png)
+![png](https://mllog.github.io/img/pythonmlch2/output_12_0.png)
 
 
 
@@ -254,7 +254,7 @@ plt.show()
 ```
 
 
-![png](output_15_0.png)
+![png](https://mllog.github.io/img/pythonmlch2/output_15_0.png)
 
 
 ### Visualize the decision boundaries
@@ -294,16 +294,16 @@ plt.show()
 ```
 
 
-![png](output_18_0.png)
+![png](https://mllog.github.io/img/pythonmlch2/output_18_0.png)
 
 
 # 2. Adaptive Linear Neuron (Adaline)
 
-![Perceptron](img/adaline.png)
+![Perceptron](https://mllog.github.io/img/pythonmlch2/adaline.png)
 
 ## Minimizing cost functions with gradient descent
 ### Cost function $J(w) = \frac{1}{2}\sum_i{(y^{(i)} - \phi(z^{(i)}))}^2$
-### ![gradient](img/gradient.png)
+### ![gradient](https://mllog.github.io/img/pythonmlch2/gradient.png)
 
 #### Using gradient descent, we can updae the weights by taking a step away from the gradient $\nabla J(w)$ of our cost functions $J(w)$
 #### $$w:= w + \Delta w$$
@@ -396,11 +396,11 @@ plt.show()
 ```
 
 
-![png](output_23_0.png)
+![png](https://mllog.github.io/img/pythonmlch2/output_23_0.png)
 
 
 ### Two problems of chossing learning rate too small or too large: if the learning rate is too small, the algorithm would require a very large number of epochs to converge. If the learning rate is too large, the algorithm may not converge (overshoot), the error becomes larger in every epoch (see following figures)
-#### ![Chossing learning rate](img/learningrate1.png)
+#### ![Chossing learning rate](https://mllog.github.io/img/pythonmlch2/learningrate1.png)
 
 ### Feature scaling: stadardization
 ### $$x_j^\prime = \frac{x_j - \mu_j}{\sigma_j}$$
@@ -451,11 +451,11 @@ plt.show()
 ```
 
 
-![png](output_31_0.png)
+![png](https://mllog.github.io/img/pythonmlch2/output_31_0.png)
 
 
 
-![png](output_31_1.png)
+![png](https://mllog.github.io/img/pythonmlch2/output_31_1.png)
 
 
 ## Large scale machine learning an stochastic gradient descent
@@ -596,11 +596,11 @@ plt.show()
 ```
 
 
-![png](output_38_0.png)
+![png](https://mllog.github.io/img/pythonmlch2/output_38_0.png)
 
 
 
-![png](output_38_1.png)
+![png](https://mllog.github.io/img/pythonmlch2/output_38_1.png)
 
 
 
@@ -630,11 +630,11 @@ plt.show()
 ```
 
 
-![png](output_40_0.png)
+![png](https://mllog.github.io/img/pythonmlch2/output_40_0.png)
 
 
 
-![png](output_40_1.png)
+![png](https://mllog.github.io/img/pythonmlch2/output_40_1.png)
 
 
 
