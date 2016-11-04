@@ -419,7 +419,7 @@ df.plot(kind='bar', stacked=True, figsize=(15, 8))
 
 
 
-![png](output_14_1.png)
+![png](https://mllog.github.io/img/output_14_1.png)
 
 
 The Sex variable seems to be a decisive feature. Women are more likely to survive
@@ -445,7 +445,7 @@ plt.legend()
 
 
 
-![png](output_16_1.png)
+![png](https://mllog.github.io/img/output_16_1.png)
 
 
 Let's now focus on the Fare ticket
@@ -469,7 +469,7 @@ plt.legend()
 
 
 
-![png](output_18_1.png)
+![png](https://mllog.github.io/img/output_18_1.png)
 
 
 Combine the age, the fare and the survival on a single chart
@@ -495,7 +495,7 @@ ax.legend(('survived', 'dead'), scatterpoints=1, loc='upper righ', fontsize=15)
 
 
 
-![png](output_20_1.png)
+![png](https://mllog.github.io/img/output_20_1.png)
 
 
 The fare is correlated with the Pclass
@@ -515,7 +515,7 @@ data.groupby('Pclass').mean()['Fare'].plot(kind='bar',figsize=(15, 8), ax = ax)
 
 
 
-![png](output_22_1.png)
+![png](https://mllog.github.io/img/output_22_1.png)
 
 
 Let's now see how the embarkation site affects the survival
@@ -537,7 +537,7 @@ df.plot(kind='bar', stacked=True, figsize=(15,8))
 
 
 
-![png](output_24_1.png)
+![png](https://mllog.github.io/img/output_24_1.png)
 
 
 There seems to be no distinct correlation here
