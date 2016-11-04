@@ -274,7 +274,7 @@ plt.show()
 ```
 
 
-![png](img/output_10_0.png)
+![png](https://mllog.github.io/img/output_10_0.png)
 
 
 ## Data Interaction
@@ -546,7 +546,7 @@ plt.show()
 ```
 
 
-![png](img/output_31_0.png)
+![png](https://mllog.github.io/img/output_31_0.png)
 
 
 ## Make prediction with XGB
