@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python Machine Learning: Chapter 2
+title: Python Machine Learning - Chapter 2
 subtitle: Training ML Algorithms for Classification
 tags: [machine learning, kaggle]
 ---
