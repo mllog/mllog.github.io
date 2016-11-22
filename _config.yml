@@ -1,10 +1,10 @@
 # Site settings
-title: i am trask
-subtitle: interesting
-email: liamtrask@gmail.com
-description: "Write your site description here. It will be used as your sites meta description as well!"
-baseurl: "https://mllog.github.io/"
-url: "https://mllog.github.io/"
+title: MLLOG
+subtitle: A Machine Learning Craftsmanship Blog
+email: trangmx@gmail.com
+description: "A place where i log my knowledge about Machine Learning!"
+baseurl: "https://mllog.github.io"
+url: "https://mllog.github.io"
 github_username:  mllog
 
 # Build settings
@@ -17,6 +17,6 @@ exclude: ["node_modules"]
 analytics :
   provider : google
   google:
-    tracking_id : 'UA-36138203-3'
+    tracking_id : 'UA-87772993-1'
   getclicky :
     site_id
