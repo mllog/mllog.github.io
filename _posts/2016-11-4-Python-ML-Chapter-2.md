@@ -2,7 +2,7 @@
 layout: post
 title: Python Machine Learning - Chapter 2
 subtitle: Training ML Algorithms for Classification
-date:       2016-11-23 12:00:00
+date:       2016-11-4 12:00:00
 author:     "mllog"
 header-img: "img/nebula.jpg"
 tags: [machine learning]
