@@ -2,8 +2,8 @@
 layout:     post
 title:      "Anyone Can Learn To Code an LSTM-RNN in Python (Part 1: RNN)"
 subtitle:   "Baby steps to your neural network's first memories."
-date:       2015-11-15 12:00:00
-author:     "iamtrask"
+date:       2016-11-23 12:00:00
+author:     "mllog"
 header-img: "img/nebula.jpg"
 ---
 
@@ -55,7 +55,7 @@ synapse_h_update = np.zeros_like(synapse_h)
 
 # training logic
 for j in range(10000):
-    
+
     # generate a simple addition problem (a + b = c)
     a_int = np.random.randint(largest_number/2) # int version
     a = int2binary[a_int] # binary encoding
@@ -66,19 +66,19 @@ for j in range(10000):
     # true answer
     c_int = a_int + b_int
     c = int2binary[c_int]
-    
+
     # where we'll store our best guess (binary encoded)
     d = np.zeros_like(c)
 
     overallError = 0
-    
+
     layer_2_deltas = list()
     layer_1_values = list()
     layer_1_values.append(np.zeros(hidden_dim))
-    
+
     # moving along the positions in the binary encoding
     for position in range(binary_dim):
-        
+
         # generate input and output
         X = np.array([[a[binary_dim - position - 1],b[binary_dim - position - 1]]])
         y = np.array([[c[binary_dim - position - 1]]]).T
@@ -93,21 +93,21 @@ for j in range(10000):
         layer_2_error = y - layer_2
         layer_2_deltas.append((layer_2_error)*sigmoid_output_to_derivative(layer_2))
         overallError += np.abs(layer_2_error[0])
-    
+
         # decode estimate so we can print it out
         d[binary_dim - position - 1] = np.round(layer_2[0][0])
-        
+
         # store hidden layer so we can use it in the next timestep
         layer_1_values.append(copy.deepcopy(layer_1))
-    
+
     future_layer_1_delta = np.zeros(hidden_dim)
-    
+
     for position in range(binary_dim):
-        
+
         X = np.array([[a[position],b[position]]])
         layer_1 = layer_1_values[-position-1]
         prev_layer_1 = layer_1_values[-position-2]
-        
+
         # error at output layer
         layer_2_delta = layer_2_deltas[-position-1]
         # error at hidden layer
@@ -117,9 +117,9 @@ for j in range(10000):
         synapse_1_update += np.atleast_2d(layer_1).T.dot(layer_2_delta)
         synapse_h_update += np.atleast_2d(prev_layer_1).T.dot(layer_1_delta)
         synapse_0_update += X.T.dot(layer_1_delta)
-        
+
         future_layer_1_delta = layer_1_delta
-    
+
 
     synapse_0 += synapse_0_update * alpha
     synapse_1 += synapse_1_update * alpha
@@ -128,7 +128,7 @@ for j in range(10000):
     synapse_0_update *= 0
     synapse_1_update *= 0
     synapse_h_update *= 0
-    
+
     # print out progress
     if(j % 1000 == 0):
         print "Error:" + str(overallError)
@@ -140,7 +140,7 @@ for j in range(10000):
         print str(a_int) + " + " + str(b_int) + " = " + str(out)
         print "------------"
 
-        
+
 </pre>
 <h3>Runtime Output:</h3>
 <pre>
@@ -268,7 +268,7 @@ Why the hidden layer? Well, we could technically do this.
 
 <p>Now compare and contrast these two approaches with the backwards alphabet and middle-of-song exercises. The hidden layer is constantly changing as it gets more inputs. Furthermore, the only way that we could reach these hidden states is with the correct <b>sequence</b> of inputs. Now the money statement, the output is deterministic given the hidden layer, and the hidden layer is only reachable with the right <b>sequence</b> of inputs. Sound familiar?</p>
 
-<p>What's the practical difference? Let's say we were trying to predict the next word in a song given the previous. The "input layer recurrence" would break down if the song accidentally had the same sequence of two words in multiple places. Think about it, if the song had the statements "I love you", and "I love carrots", and the network was trying to predict the next word, how would it know what follows "I love"? It could be carrots. It could be you. The network REALLY needs to know more about what part of the song its in. However, the "hidden layer recurrence" doesn't break down in this way. It subtely remembers everything it saw (with memories becoming more subtle as it they fade into the past). To see this in action, check out <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/" target="_blank"> this</a>. 
+<p>What's the practical difference? Let's say we were trying to predict the next word in a song given the previous. The "input layer recurrence" would break down if the song accidentally had the same sequence of two words in multiple places. Think about it, if the song had the statements "I love you", and "I love carrots", and the network was trying to predict the next word, how would it know what follows "I love"? It could be carrots. It could be you. The network REALLY needs to know more about what part of the song its in. However, the "hidden layer recurrence" doesn't break down in this way. It subtely remembers everything it saw (with memories becoming more subtle as it they fade into the past). To see this in action, check out <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/" target="_blank"> this</a>.
 
 <center><b>stop and make sure this feels comfortable in your mind</b></center><br />
 

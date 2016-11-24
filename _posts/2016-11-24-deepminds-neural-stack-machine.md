@@ -2,8 +2,8 @@
 layout:     post
 title:      "How to Code and Understand DeepMind's Neural Stack Machine"
 subtitle:   "Learning to Transduce with Unbounded Memory"
-date:       2016-02-25 12:00:00
-author:     "iamtrask"
+date:       2016-11-24 10:53:00
+author:     "mllog"
 header-img: "img/stack_nebula.jpg"
 ---
 
@@ -40,7 +40,7 @@ A close eye might ask, "We learn things with neural networks. What is there to l
 
 <h3>...so What is a Neural Stack?</h3>
 
-<p>A Neural Stack is a stack that can learn to correctly accept a sequence of inputs, remember them, and then transform them according to a pattern learned from data. 
+<p>A Neural Stack is a stack that can learn to correctly accept a sequence of inputs, remember them, and then transform them according to a pattern learned from data.
 
 <h3>...and How Does It Learn?</h3>
 
@@ -100,7 +100,7 @@ A close eye might ask, "We learn things with neural networks. What is there to l
     <td class="tg-4kyz">"Pop Signal"</td>
     <td class="tg-4kyz">u_t</td>
     <td class="tg-4kyz">How much the controller wants to pop.</td>
-    
+
   </tr>
   <tr>
     <td class="tg-4kyz">"Push Signal"</td>
@@ -427,7 +427,7 @@ def r_t_error(t,r_t_error):
         temp = min(s[t][i],max(0,1 - np.sum(s[t][i+1:t+1])))
         V_delta[t][i] += temp * r_t_error
         temp_error = np.sum(r_t_error * V[t][i])
-    
+
         if(s[t][i] < max(0,1 - np.sum(s[t][i+1:t+1]))):
             s_delta[t][i] += temp_error
         else:
@@ -457,12 +457,12 @@ sequence = np.array([[0.1,0.2,0.3],[0,0,0]]).T
 
 # INIT
 V = list() # stack states
-s = list() # stack strengths 
+s = list() # stack strengths
 d = list() # push strengths
 u = list() # pop strengths
 
 V_delta = list() # stack states
-s_delta = list() # stack strengths 
+s_delta = list() # stack strengths
 d_delta = list() # push strengths
 u_delta = list() # pop strengths
 
@@ -574,23 +574,23 @@ class NeuralStack():
         self.stack_width = stack_width
         self.o_prime_dim = o_prime_dim
         self.reset()
-        
+
     def reset(self):
         # INIT STACK
         self.V = list() # stack states
-        self.s = list() # stack strengths 
+        self.s = list() # stack strengths
         self.d = list() # push strengths
         self.u = list() # pop strengths
         self.r = list()
         self.o = list()
 
         self.V_delta = list() # stack states
-        self.s_delta = list() # stack strengths 
+        self.s_delta = list() # stack strengths
         self.d_error = list() # push strengths
         self.u_error = list() # pop strengths
-        
+
         self.t = 0
-        
+
     def pushAndPopForward(self,v_t,d_t,u_t):
 
         self.d.append(d_t)
@@ -611,13 +611,13 @@ class NeuralStack():
             V_t = self.V[-1]
         self.V.append(np.concatenate((V_t,np.atleast_2d(v_t)),axis=0))
         self.V_delta.append(np.zeros_like(self.V[-1]))
-        
+
         r_t = self.r_t()
         self.r.append(r_t)
-        
+
         self.t += 1
         return r_t
-    
+
     def s_t(self,i):
         if(i >= 0 and i < self.t):
             inner_sum = self.s[self.t-1][i+1:self.t-0]
@@ -626,7 +626,7 @@ class NeuralStack():
             return self.d[self.t]
         else:
             print "Problem"
-            
+
     def s_t_error(self,i,error):
         if(i >= 0 and i < self.t):
             if(self.s_t(i) >= 0):
@@ -638,14 +638,14 @@ class NeuralStack():
             self.d_error[self.t] += error
         else:
             print "Problem"
-            
+
     def r_t(self):
         r_t_out = np.zeros(self.stack_width)
         for i in xrange(0,self.t+1):
             temp = min(self.s[self.t][i],relu(1 - np.sum(self.s[self.t][i+1:self.t+1])))
             r_t_out += temp * self.V[self.t][i]
         return r_t_out
-            
+
     def r_t_error(self,r_t_error):
         for i in xrange(0, self.t+1):
             temp = min(self.s[self.t][i],relu(1 - np.sum(self.s[self.t][i+1:self.t+1])))
@@ -657,7 +657,7 @@ class NeuralStack():
             else:
                 if(relu(1 - np.sum(self.s[self.t][i+1:self.t+1])) > 0):
                     self.s_delta[self.t][i+1:self.t+1] -= temp_error # minus equal becuase of the (1-).. and drop the 1
-            
+
     def backprop(self,all_errors_in_order_of_training_data):
         errors = all_errors_in_order_of_training_data
         for error in reversed(list((errors))):
@@ -666,7 +666,7 @@ class NeuralStack():
             for i in reversed(xrange(self.t+1)):
                 self.s_t_error(i,self.s_delta[self.t][i])
 
-        
+
 u_weights = np.array([0,0,0,0,0,0.0])
 
 o_primes = np.eye(6)
@@ -678,15 +678,15 @@ W_op_u = (np.random.randn(6,1) * 0.2) - 0.2
 b_u = np.zeros(1)
 
 for h in xrange(10000):
-    
+
     sequence = np.array([np.random.rand(3),[0,0,0]]).T
     sequence = np.concatenate((sequence,np.zeros_like(sequence)))
-    
+
     stack = NeuralStack()
 
     d_weights = sigmoid(np.dot(o_primes,W_op_d) + b_d)
     u_weights = sigmoid(np.dot(o_primes,W_op_u) + b_u)
-    
+
     reads = list()
     for i in xrange(6):
         reads.append(stack.pushAndPopForward(sequence[i],d_weights[i],u_weights[i]))
@@ -715,7 +715,7 @@ for h in xrange(10000):
             d_weights[k] = 0
         if u_weights[k] < 0:
             u_weights[k] = 0
-            
+
 
     if(h % 100 == 0):
         print errors_in_order        
@@ -783,23 +783,23 @@ class NeuralStack():
         self.stack_width = stack_width
         self.o_prime_dim = o_prime_dim
         self.reset()
-        
+
     def reset(self):
         # INIT STACK
         self.V = list() # stack states
-        self.s = list() # stack strengths 
+        self.s = list() # stack strengths
         self.d = list() # push strengths
         self.u = list() # pop strengths
         self.r = list()
         self.o = list()
 
         self.V_delta = list() # stack states
-        self.s_delta = list() # stack strengths 
+        self.s_delta = list() # stack strengths
         self.d_error = list() # push strengths
         self.u_error = list() # pop strengths
-        
+
         self.t = 0
-        
+
     def pushAndPopForward(self,v_t,d_t,u_t):
 
         self.d.append(d_t)
@@ -820,13 +820,13 @@ class NeuralStack():
             V_t = self.V[-1]
         self.V.append(np.concatenate((V_t,np.atleast_2d(v_t)),axis=0))
         self.V_delta.append(np.zeros_like(self.V[-1]))
-        
+
         r_t = self.r_t()
         self.r.append(r_t)
-        
+
         self.t += 1
         return r_t
-    
+
     def s_t(self,i):
         if(i >= 0 and i < self.t):
             inner_sum = self.s[self.t-1][i+1:self.t-0]
@@ -835,7 +835,7 @@ class NeuralStack():
             return self.d[self.t]
         else:
             print "Problem"
-            
+
     def s_t_error(self,i,error):
         if(i >= 0 and i < self.t):
             if(self.s_t(i) >= 0):
@@ -847,14 +847,14 @@ class NeuralStack():
             self.d_error[self.t] += error
         else:
             print "Problem"
-            
+
     def r_t(self):
         r_t_out = np.zeros(self.stack_width)
         for i in xrange(0,self.t+1):
             temp = min(self.s[self.t][i],relu(1 - np.sum(self.s[self.t][i+1:self.t+1])))
             r_t_out += temp * self.V[self.t][i]
         return r_t_out
-            
+
     def r_t_error(self,r_t_error):
         for i in xrange(0, self.t+1):
             temp = min(self.s[self.t][i],relu(1 - np.sum(self.s[self.t][i+1:self.t+1])))
@@ -871,7 +871,7 @@ class NeuralStack():
         self.r_t_error(r_t_error)
         for i in reversed(xrange(self.t+1)):
             self.s_t_error(i,self.s_delta[self.t][i])
-    
+
     def backprop(self,all_errors_in_order_of_training_data):
         errors = all_errors_in_order_of_training_data
         for error in reversed(list((errors))):
@@ -972,19 +972,19 @@ error = 0
 max_len = 1
 batch_size = 10
 for it in xrange(1000000000):
-    
+
     sub_sequence_length = np.random.randint(max_len)+1
     sequence = (np.random.random(sub_sequence_length)*options).astype(int)+1
 #     sequence[-1] = 0
     sequence
-    
+
     X = np.zeros((sub_sequence_length*2,options+1))
     Y = np.zeros_like(X)
     for i in xrange(len(sequence)):
         X[i][sequence[i]] = 1
         X[i][0] = 1
         Y[-i-1][sequence[i]] = 1
-    
+
 </pre>
 
 <p>Ok, so the logic above that creates training examples doesn't exactly get used. I just use that section further up to experiment with the training example logic. I encourage you to do it. As you can see here, we randomly generate new training examples as we go. Note that "max_len" refers to the maximum length that we will model initially. As the error goes down (the neural network learns), this number will increase, modeling longer and longer sequences. Basically, we start by training the neural stack on short sequences, and once it gets good at those we start presenting longer ones. Experimenting with how long to start with was very fascinating to me. I highly encourage playing around with it.</p>
@@ -1070,7 +1070,7 @@ for i in list(reversed(xrange(len(X)))):
 
     layer['h_t_delta'] = layer['h_t_error'] * tanh_out2deriv(layer['h_t'])
     layer['h_t-1_error'] = np.dot(layer['h_t_delta'],W_hh.T)
-    layer['r_t-1_error'] = np.dot(layer['h_t_delta'],W_rh.T)	
+    layer['r_t-1_error'] = np.dot(layer['h_t_delta'],W_rh.T)
 
 </pre>
 
@@ -1111,44 +1111,44 @@ for i in xrange(len(X)):
 if(it % batch_size == (batch_size-1)):
     W_xh += W_xh_update/batch_size
     W_xh_update *= 0
-    
+
     W_hh += W_hh_update/batch_size
     W_hh_update *= 0
-    
+
     W_rh += W_rh_update/batch_size
     W_rh_update *= 0
-    
+
     b_h += b_h_update/batch_size
     b_h_update *= 0
-    
+
     W_hop += W_hop_update/batch_size
     W_hop_update *= 0
-    
+
     b_op += b_op_update/batch_size
     b_op_update *= 0
-    
+
     W_op_d += W_op_d_update/batch_size
     W_op_d_update *= 0
-    
+
     W_op_u += W_op_u_update/batch_size
     W_op_u_update *= 0
-    
+
     W_op_v += W_op_v_update/batch_size
     W_op_v_update *= 0
-    
+
     b_d += b_d_update/batch_size
     b_d_update *= 0
-    
+
     b_d += b_d * 0.00025 * batch_size
     b_u += b_u_update/batch_size
     b_u_update *= 0
-    
+
     b_v += b_v_update/batch_size
     b_v_update *= 0
-    
+
     W_op_o += W_op_o_update/batch_size
     W_op_o_update *= 0
-    
+
     b_o += b_o_update/batch_size
     b_o_update *= 0
 
@@ -1185,23 +1185,23 @@ class NeuralStack():
         self.stack_width = stack_width
         self.o_prime_dim = o_prime_dim
         self.reset()
-        
+
     def reset(self):
         # INIT STACK
         self.V = list() # stack states
-        self.s = list() # stack strengths 
+        self.s = list() # stack strengths
         self.d = list() # push strengths
         self.u = list() # pop strengths
         self.r = list()
         self.o = list()
 
         self.V_delta = list() # stack states
-        self.s_delta = list() # stack strengths 
+        self.s_delta = list() # stack strengths
         self.d_error = list() # push strengths
         self.u_error = list() # pop strengths
-        
+
         self.t = 0
-        
+
     def pushAndPopForward(self,v_t,d_t,u_t):
 
         self.d.append(d_t)
@@ -1222,13 +1222,13 @@ class NeuralStack():
             V_t = self.V[-1]
         self.V.append(np.concatenate((V_t,np.atleast_2d(v_t)),axis=0))
         self.V_delta.append(np.zeros_like(self.V[-1]))
-        
+
         r_t = self.r_t()
         self.r.append(r_t)
-        
+
         self.t += 1
         return r_t
-    
+
     def s_t(self,i):
         if(i >= 0 and i < self.t):
             inner_sum = self.s[self.t-1][i+1:self.t-0]
@@ -1237,7 +1237,7 @@ class NeuralStack():
             return self.d[self.t]
         else:
             print "Problem"
-            
+
     def s_t_error(self,i,error):
         if(i >= 0 and i < self.t):
             if(self.s_t(i) >= 0):
@@ -1249,14 +1249,14 @@ class NeuralStack():
             self.d_error[self.t] += error
         else:
             print "Problem"
-            
+
     def r_t(self):
         r_t_out = np.zeros(self.stack_width)
         for i in xrange(0,self.t+1):
             temp = min(self.s[self.t][i],relu(1 - np.sum(self.s[self.t][i+1:self.t+1])))
             r_t_out += temp * self.V[self.t][i]
         return r_t_out
-            
+
     def r_t_error(self,r_t_error):
         for i in xrange(0, self.t+1):
             temp = min(self.s[self.t][i],relu(1 - np.sum(self.s[self.t][i+1:self.t+1])))
@@ -1273,13 +1273,13 @@ class NeuralStack():
         self.r_t_error(r_t_error)
         for i in reversed(xrange(self.t+1)):
             self.s_t_error(i,self.s_delta[self.t][i])
-    
+
     def backprop(self,all_errors_in_order_of_training_data):
         errors = all_errors_in_order_of_training_data
         for error in reversed(list((errors))):
             self.backprop_single(error)
 
-        
+
 options = 2
 sub_sequence_length = 5
 sequence_length = sub_sequence_length*2
@@ -1350,19 +1350,19 @@ error = 0
 max_len = 1
 batch_size = 10
 for it in xrange(1000000000):
-    
+
     sub_sequence_length = np.random.randint(max_len)+1
     sequence = (np.random.random(sub_sequence_length)*options).astype(int)+1
 #     sequence[-1] = 0
     sequence
-    
+
     X = np.zeros((sub_sequence_length*2,options+1))
     Y = np.zeros_like(X)
     for i in xrange(len(sequence)):
         X[i][sequence[i]] = 1
         X[i][0] = 1
         Y[-i-1][sequence[i]] = 1
-    
+
     layers = list()
     stack = NeuralStack(stack_width=stack_width,o_prime_dim=o_prime_dim)    
     for i in xrange(len(X)):
@@ -1465,44 +1465,44 @@ for it in xrange(1000000000):
     if(it % batch_size == (batch_size-1)):
         W_xh += W_xh_update/batch_size
         W_xh_update *= 0
-        
+
         W_hh += W_hh_update/batch_size
         W_hh_update *= 0
-        
+
         W_rh += W_rh_update/batch_size
         W_rh_update *= 0
-        
+
         b_h += b_h_update/batch_size
         b_h_update *= 0
-        
+
         W_hop += W_hop_update/batch_size
         W_hop_update *= 0
-        
+
         b_op += b_op_update/batch_size
         b_op_update *= 0
-        
+
         W_op_d += W_op_d_update/batch_size
         W_op_d_update *= 0
-        
+
         W_op_u += W_op_u_update/batch_size
         W_op_u_update *= 0
-        
+
         W_op_v += W_op_v_update/batch_size
         W_op_v_update *= 0
-        
+
         b_d += b_d_update/batch_size
         b_d_update *= 0
-        
+
         b_d += b_d * 0.00025 * batch_size
         b_u += b_u_update/batch_size
         b_u_update *= 0
-        
+
         b_v += b_v_update/batch_size
         b_v_update *= 0
-        
+
         W_op_o += W_op_o_update/batch_size
         W_op_o_update *= 0
-        
+
         b_o += b_o_update/batch_size
         b_o_update *= 0
 </pre>
@@ -1629,23 +1629,23 @@ class NeuralStack():
         self.stack_width = stack_width
         self.o_prime_dim = o_prime_dim
         self.reset()
-        
+
     def reset(self):
         # INIT STACK
         self.V = list() # stack states
-        self.s = list() # stack strengths 
+        self.s = list() # stack strengths
         self.d = list() # push strengths
         self.u = list() # pop strengths
         self.r = list()
         self.o = list()
 
         self.V_delta = list() # stack states
-        self.s_delta = list() # stack strengths 
+        self.s_delta = list() # stack strengths
         self.d_error = list() # push strengths
         self.u_error = list() # pop strengths
-        
+
         self.t = 0
-        
+
     def pushAndPopForward(self,v_t,d_t,u_t):
 
         self.d.append(d_t)
@@ -1666,13 +1666,13 @@ class NeuralStack():
             V_t = self.V[-1]
         self.V.append(np.concatenate((V_t,np.atleast_2d(v_t)),axis=0))
         self.V_delta.append(np.zeros_like(self.V[-1]))
-        
+
         r_t = self.r_t()
         self.r.append(r_t)
-        
+
         self.t += 1
         return r_t
-    
+
     def s_t(self,i):
         if(i >= 0 and i < self.t):
             inner_sum = self.s[self.t-1][i+1:self.t-0]
@@ -1681,7 +1681,7 @@ class NeuralStack():
             return self.d[self.t]
         else:
             print "Problem"
-            
+
     def s_t_error(self,i,error):
         if(i >= 0 and i < self.t):
             if(self.s_t(i) >= 0):
@@ -1693,14 +1693,14 @@ class NeuralStack():
             self.d_error[self.t] += error
         else:
             print "Problem"
-            
+
     def r_t(self):
         r_t_out = np.zeros(self.stack_width)
         for i in xrange(0,self.t+1):
             temp = min(self.s[self.t][i],relu(1 - np.sum(self.s[self.t][i+1:self.t+1])))
             r_t_out += temp * self.V[self.t][i]
         return r_t_out
-            
+
     def r_t_error(self,r_t_error):
         for i in xrange(0, self.t+1):
             temp = min(self.s[self.t][i],relu(1 - np.sum(self.s[self.t][i+1:self.t+1])))
@@ -1717,13 +1717,13 @@ class NeuralStack():
         self.r_t_error(r_t_error)
         for i in reversed(xrange(self.t+1)):
             self.s_t_error(i,self.s_delta[self.t][i])
-    
+
     def backprop(self,all_errors_in_order_of_training_data):
         errors = all_errors_in_order_of_training_data
         for error in reversed(list((errors))):
             self.backprop_single(error)
 
-        
+
 options = 2
 sub_sequence_length = 5
 sequence_length = sub_sequence_length*2
@@ -1804,7 +1804,7 @@ reconstruct_error_2 = 0
 max_len = 3
 batch_size = 50
 for it in xrange(750000):
-    
+
 #     if(it % 100 == 0):
     sub_sequence_length = np.random.randint(max_len)+3
     sequence = (np.random.random(sub_sequence_length)*options).astype(int)+2
@@ -1817,7 +1817,7 @@ for it in xrange(750000):
         X[-i-1][0] = 1
         X[i][1] = 1
         Y[-i-1][sequence[i]] = 1
-            
+
 
     layers = list()
     stack = NeuralStack(stack_width=stack_width,o_prime_dim=o_prime_dim)    
@@ -1858,7 +1858,7 @@ for it in xrange(750000):
         if(i>0):
             layer['xo_t_error'] = layers[i-1]['x'] - layer['xo_t']
             layer['xo_t_delta'] = layer['xo_t_error'] * sigmoid_out2deriv(layer['xo_t'])            
-            
+
             layer['x_o_prime_x_t_error'] = (layers[i-1]['x'] - layer['o_prime_x_t'])
             layer['x_o_prime_x_t_delta'] = layer['x_o_prime_x_t_error'] * sigmoid_out2deriv(layer['o_prime_x_t'])
         else:
@@ -1867,7 +1867,7 @@ for it in xrange(750000):
 #         if(it > 2000):
         layer['xo_t_delta'] *= 1
         layer['x_o_prime_x_t_delta'] *= 1
-        
+
 
         error += np.sum(np.abs(layer['o_t_error']))
         if(i > 0):
@@ -1875,7 +1875,7 @@ for it in xrange(750000):
             reconstruct_error_2 += np.sum(np.abs(layer['x_o_prime_x_t_error']))
         if(it % 100 == 99):
             if(i == len(X)-1):
-    
+
                 if(it % 1000 == 999):
                     print "MaxLen:"+str(max_len)+ " Iter:" + str(it) + " Error:" + str(error)+ " RecError:" + str(reconstruct_error) + " RecError2:"+ str(reconstruct_error_2) + " True:" + str(sequence) + " Pred:" + str(map(lambda x:np.argmax(x['o_t']),layers[sub_sequence_length:]))
                     if(it % 10000 == 9999):
@@ -1883,7 +1883,7 @@ for it in xrange(750000):
                         print "D:" + str(np.array(stack.d).T[0])
 #                     print "o_t:"
 #                     for l in layers[sub_sequence_length:]:
-#                         print l['o_t'] 
+#                         print l['o_t']
 #                     print "V_t:"
 #                     for row in stack.V[-1]:
 #                         print row
@@ -1937,14 +1937,14 @@ for it in xrange(750000):
         W_hh_update += alpha * np.outer(layer['h_t-1'],layer['h_t_delta'])
         W_rh_update += alpha * np.outer(layer['r_t-1'],layer['h_t_delta'])
         W_hox_update += alpha * np.outer(layer['h_t'],layer['xo_t_delta'])
-        
+
         b_h_update += alpha * layer['h_t_delta']
 
         W_hop_update += alpha * np.outer(layer['h_t'],layer['o_prime_t_delta'])
         b_op_update += alpha * layer['o_prime_t_delta']
-        
+
         W_opx_update += alpha * np.outer(layer['o_prime_t'],layer['x_o_prime_x_t_delta'])
-        
+
         if(i < len(X)-1):
             W_op_d_update += alpha * np.outer(layer['o_prime_t'],layer['d_t_delta'])
             W_op_u_update += alpha * np.outer(layer['o_prime_t'],layer['u_t_delta'])
@@ -1961,49 +1961,49 @@ for it in xrange(750000):
     if(it % batch_size == (batch_size-1)):
         W_xh += W_xh_update/batch_size
         W_xh_update *= 0
-        
+
         W_hh += W_hh_update/batch_size
         W_hh_update *= 0
-        
+
         W_rh += W_rh_update/batch_size
         W_rh_update *= 0
-        
+
         b_h += b_h_update/batch_size
         b_h_update *= 0
-        
+
         W_hop += W_hop_update/batch_size
         W_hop_update *= 0
-        
+
         b_op += b_op_update/batch_size
         b_op_update *= 0
-        
+
         W_op_d += W_op_d_update/batch_size
         W_op_d_update *= 0
-        
+
         W_op_u += W_op_u_update/batch_size
         W_op_u_update *= 0
-        
+
         W_op_v += W_op_v_update/batch_size
         W_op_v_update *= 0
-        
+
         W_opx += W_opx_update/batch_size
         W_opx_update *= 0
-        
+
         W_hox += W_hox_update/batch_size
         W_hox_update *= 0
-        
+
         b_d += b_d_update/batch_size
         b_d_update *= 0
-        
+
         b_u += b_u_update/batch_size
         b_u_update *= 0
-        
+
         b_v += b_v_update/batch_size
         b_v_update *= 0
-        
+
         W_op_o += W_op_o_update/batch_size
         W_op_o_update *= 0
-        
+
         b_o += b_o_update/batch_size
         b_o_update *= 0
 
