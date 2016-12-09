@@ -8,4 +8,4 @@ header-img: "img/nebula.jpg"
 ---
 
 
-https://github.com/mllog/machine-learning-journey
+[https://github.com/mllog/machine-learning-journey](https://github.com/mllog/machine-learning-journey)
